@@ -74,7 +74,7 @@ On_IPurple="\033[10;95m"  # Purple
 On_ICyan="\033[0;106m"    # Cyan
 On_IWhite="\033[0;107m"   # White
 
-# Various variables you might want for your PS1 prompt instead
+# Various variables you might want 4 your PS1 prompt instead
 Time12h="\T"
 Time12a="\@"
 PathShort="\w"
