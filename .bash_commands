@@ -1,0 +1,94 @@
+#!/bin/bash
+
+###################################################
+###################################################
+# Useful automation commands for making work easy #
+###################################################
+###################################################
+
+# mcd:          Makes #new Dir and jumps inside
+function mcd () {
+     mkdir -p "$1" && cd "$1"; 
+}        
+
+# View md Files in color and foramted
+function mdviewer() {
+  pandoc $* | lynx -stdin
+}
+
+# Backup bash setup to git.
+function backup() {
+    cp -f ~/.bash* ~/_dev/automation/bash-ubuntu/;
+    currentdir=`pwd`;
+    cd ~/_dev/automation/bash-ubuntu/;
+    git checkout development
+    git add .
+    git commit -m "automated backup"
+    git push
+    cd ${currentdir}
+}
+
+# Copy current directory to clipboard
+function pop() {
+     pwd| xclip -selection clipboard;
+     echo "Working Directory Copied to Clipboard"; 
+}
+
+# Get my GitHub password from lastPass into my clipboard
+function gitpass() { 
+    # Replace << ??? >>
+    lpass login ||Your email address 4 lastpass||
+    lpass show ||NAME OF YOUR PASSWORD RERCORD|| | grep Username 
+    echo "Logged In"; lpass show howling-sailsgithub.com | grep Password | awk '{print $2}' | xclip -selection clipboard
+    lpass logout -f
+    echo "Password in ClipBoard" 
+}
+
+
+# Show what automated scripted installs are available
+function installs() {
+    source ~/.bash_installs
+    echo ""
+    installList
+    echo ""
+}
+
+
+# Print SSH Publish key
+alias sshkey='cat ~/.ssh/id_rsa.pub'
+
+# Edit .bash_profile
+alias bsh='vim ~/.bash_profile'
+
+# Reload .bash_profile
+function src () {
+    # SED 4 handling removing windows cr/lf issues
+    sudo sed -i 's/\r$//' /home/vagrant/.bash_profile
+    sudo sed -i 's/\r$//' /home/vagrant/.bash_aliases
+    sudo sed -i 's/\r$//' /home/vagrant/.bash_prompt
+    sudo sed -i 's/\r$//' /home/vagrant/.bash_commands
+    sudo sed -i 's/\r$//' /home/vagrant/.bash_installs
+    sudo sed -i 's/\r$//' /home/vagrant/.bash_history
+    source ~/.bash_profile
+}
+
+# SSH to box with SSH Key identity
+alias sssh='ssh -i ~/.ssh/id_rsa'
+
+#Show hints
+function hints () {
+    hint1=`cat ~/.bash_commands | grep -a1 \# | grep -v "hint" | grep -v "gif-for-cli"` 
+    echo "${BYellow}${hint1}${BWhite}"
+}
+
+# Show Network Status
+function shownet () {
+
+    sudo ifconfig
+    #sudo dhcpcd -k
+    #sudo ifup eth1
+    #sudo cat /etc/sysconfig/network/dhcp
+    #sudo timedatectl set-local-rtc 1
+    sudo netplan ip leases
+    #sudo netplan ip leases eth1
+}

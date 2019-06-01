@@ -1,0 +1,2 @@
+# Linux Bash Profile Setup
+

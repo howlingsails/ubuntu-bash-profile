@@ -1,0 +1,88 @@
+#!/bin/bash
+
+#################################################
+#################################################
+# List of useful softwarer installation         #
+#################################################
+#################################################
+
+# Show what automated scripted installs are available
+function installList () {
+    installlist=`cat ~/.bash_installs | grep -a1 -e "#" | grep -v -e "#" | grep -v "echo" | awk '{print $2}' | sort | xargs -s 120`
+    echo -e "${Blue}Installs Available"
+    echo -e "${BWhite}${installlist}"
+}
+
+# Install a Neo4J Graph Database
+function installNeo4J () {
+    mcd ~/_dev/servers
+    wget https://neo4j.com/artifact.php?name=neo4j-community-3.5.3-unix.tar.gz
+    tar xvzf artifact.php\?name\=neo4j-community-3.5.3-unix.tar.gz 
+    rm *gz
+    ls
+    cd neo4j-community-3.5.3/
+
+    echo "# Start the neo4j database " >> ~/.bash_commands
+    echo "function neo4jStart () {" >> ~/.bash_commands
+    echo "  ~/_dev/servers/neo4j-community-3.5.3/bin/neo4j start" >> ~/.bash_commands
+    echo "}\n" >> ~/.bash_commands
+
+    echo "# Stop the neo4j database " >> ~/.bash_commands
+    echo "function neo4jStop () {" >> ~/.bash_commands
+    echo "  ~/_dev/servers/neo4j-community-3.5.3/bin/neo4j stop" >> ~/.bash_commands
+    echo "}\n" >> ~/.bash_commands
+
+    echo "# Stop the neo4j database " >> ~/.bash_commands
+    echo "function neo4jStatus () {" >> ~/.bash_commands
+    echo "  ~/_dev/servers/neo4j-community-3.5.3/bin/neo4j status" >> ~/.bash_commands
+    echo "}\n" >> ~/.bash_commands
+
+}
+
+
+# Install a fun gif-for-cli ascii video maker
+function installGifForCli () {
+    sudo apt-get install ffmpeg
+    sudo apt install python3-pip
+    pip3 install --user gif-for-cli
+    echo "" >> ~/.bash_commands
+    echo "# gif-for-cli to ascii art" >> ~/.bash_commands
+    echo "alias wow='clear; gif-for-cli -c █ --cols 100 --rows 40 https://media.giphy.com/media/XJMf9ULj0vmC1qXiud/giphy.gif'" >> ~/.bash_commands
+    echo "alias makeitso='clear; gif-for-cli -c █ --cols 100 --rows 40 https://media.giphy.com/media/bKnEnd65zqxfq/giphy.gif'" >> ~/.bash_commands
+    echo "alias boom='clear; gif-for-cli -c █ --cols 100 --rows 40 https://media.giphy.com/media/oe33xf3B50fsc/giphy.gif'" >> ~/.bash_commands
+    src
+    
+}
+
+# Install Gimp picture editor
+function installGimp () {
+    sudo apt install gimp
+}
+
+# Install LastPass cli 
+function installLPass () {
+    currentDir=`pwd`
+    sudo apt-get --no-install-recommends -yqq install   bash-completion   build-essential   cmake   libcurl4    libcurl4-openssl-dev    libssl-dev    libxml2   libxml2-dev    libssl1.1   pkg-config   ca-certificates   xclip
+    mcd ~/_dev/external
+    git clone git@github.com:lastpass/lastpass-cli.git
+    cd lastpass-cli/
+    make
+    cd build/
+    sudo cp lpass /usr/bin
+    cd ..
+    rm -rf lastpass-cli
+    cd ${currentDir}
+}
+
+# Accept and Install Oracle Java
+function acceptOracleJavaAndInstall () {
+    sudo echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections
+    apt install -y oracle-java8-installer
+}
+
+
+# Install Nodejs
+function installNodeDev () {
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
+    sudo apt install nodejs
+}

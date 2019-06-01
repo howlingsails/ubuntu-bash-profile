@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#################################################
+#################################################
+# Set of Alias and Commands to make connecting  #
+# with other systems quick and easy.            #
+#################################################
+#################################################
+
+
+alias connectCircle='ssh -o PubkeyAuthentication=no vagrant@localhost'
