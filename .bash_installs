@@ -90,7 +90,7 @@ function installNodeDev () {
 function installLatestProfile () {
     currentdir=`pwd`;
     cd /tmp/
-    https://github.com/howlingsails/ubuntu-bash-profile/archive/master.zip
+    wget https://github.com/howlingsails/ubuntu-bash-profile/archive/master.zip
     unzip master.zip
     cd master
     echo "About to override .bash_profile(s)"
