@@ -37,13 +37,12 @@ function pop() {
 # Get my GitHub password from lastPass into my clipboard
 function gitpass() { 
     # Replace << ??? >>
-    # Uncomment below after filling in the lastpass details
-    #lpass login ||Your email address 4 lastpass||
-    #lpass show ||NAME OF YOUR PASSWORD RERCORD|| | grep Username 
-    
-    echo "Logged In"; lpass show howling-sailsgithub.com | grep Password | awk '{print $2}' | xclip -selection clipboard
-    lpass logout -f
-    echo "Password in ClipBoard" 
+    echo "Uncomment below after replacing the lastpass details below"
+    # lpass login youremail@yourprovider.net 
+    # lpass show the-name-saved-on-lastpass | grep Username 
+    # echo "Logged In"; lpass show the-name-saved-on-lastpass | grep Password | awk '{print $2}' | xclip -selection clipboard
+    # lpass logout -f
+    #echo "Password in ClipBoard" 
 }
 
 
