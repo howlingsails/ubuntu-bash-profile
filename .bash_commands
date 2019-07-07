@@ -8,8 +8,8 @@
 
 
 function hints ()  {
-    echo "";
-    echo "";
+    echo "Place to get notes";
+    echo "vmstat 3 3";
     echo "";
     echo "";
 }
