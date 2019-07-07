@@ -86,3 +86,18 @@ function installNodeDev () {
     curl -sL https://deb.nodesource.com/setup_10.x | sudo bash -
     sudo apt install nodejs
 }
+
+function installLatestProfile () {
+    currentdir=`pwd`;
+    cd /tmp/
+    https://github.com/howlingsails/ubuntu-bash-profile/archive/master.zip
+    unzip master.zip
+    cd master
+    echo "About to override .bash_profile(s)"
+    echo "press ctrl-c to exit";
+    read inputfromuser;
+    cp .bash* ~/
+    source ~/.bash_profile
+    cd currentDir
+
+}

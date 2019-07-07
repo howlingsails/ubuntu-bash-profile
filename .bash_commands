@@ -6,6 +6,15 @@
 ###################################################
 ###################################################
 
+
+function hints ()  {
+    echo "";
+    echo "";
+    echo "";
+    echo "";
+}
+
+
 # mcd:          Makes #new Dir and jumps inside
 function mcd () {
      mkdir -p "$1" && cd "$1"; 
@@ -93,3 +102,5 @@ function shownet () {
     sudo netplan ip leases
     #sudo netplan ip leases eth1
 }
+
+
